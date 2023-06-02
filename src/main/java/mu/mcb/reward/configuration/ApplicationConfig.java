@@ -1,7 +1,7 @@
 package mu.mcb.reward.configuration;
 
-import com.alibou.security.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import mu.mcb.reward.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

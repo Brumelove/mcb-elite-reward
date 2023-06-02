@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.alibou.security.user.Permission.*;
+import static mu.mcb.reward.enums.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {

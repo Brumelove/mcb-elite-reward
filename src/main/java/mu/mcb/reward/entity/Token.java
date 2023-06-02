@@ -10,13 +10,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Token {
-
   @Id
   @GeneratedValue
   public Integer id;

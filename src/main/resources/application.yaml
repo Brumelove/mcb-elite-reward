@@ -4,12 +4,11 @@ feign:
     enabled: false
   okhttp:
     enabled: true
-
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/jwt_security
+    url: jdbc:postgresql://localhost:5432/mcb-rewards
     username: elite
-    password: password
+    password: pwd
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -32,3 +31,7 @@ application:
 mcb-workflow-messaging:
   service:
     base-url: www.test
+server:
+  port: 8091
+  servlet:
+    context-path: /mcb-rewards

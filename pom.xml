@@ -102,12 +102,6 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
-        <dependency>
-            <groupId>mu.mcb.backbase</groupId>
-            <artifactId>mcb-wealth-workflow</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
 
     </dependencies>
     <dependencyManagement>
