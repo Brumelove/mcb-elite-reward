@@ -12,7 +12,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: false
     properties:
       hibernate:
@@ -23,15 +23,19 @@ spring:
 application:
   security:
     jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000 # a day
-      refresh-token:
-        expiration: 604800000 # 7 days
 
-mcb-workflow-messaging:
-  service:
-    base-url: www.test
+      # a day
+      refresh-token:
+        # 7 days
+
+mcb-innov-app:
+  username: bantish
+  password: P@ssw0rd
+  base-url: https://mcbinovappapi.azurewebsites.net/
 server:
   port: 8091
-  servlet:
-    context-path: /mcb-rewards
+
+app:
+  name: mcb-rewards
+  version: 1
+  description: Mcb InnovApp challenge for EnnovApp

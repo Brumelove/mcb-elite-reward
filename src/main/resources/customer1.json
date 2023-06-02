@@ -1,0 +1,21 @@
+{
+  "Customer": {
+    "CustomerId": "bantish",
+    "CustomerStatus": "Active",
+    "Title": "Mr",
+    "FirstName": "Bantish",
+    "LastName": "Yuvraj",
+    "DateOfBirth": "1983-06-02",
+    "preferredLanguage": "English",
+    "Gender": "M",
+    "PhoneNumber": "57348902",
+    "StreetName": "avenue bluemerd",
+    "City": "Portlouis",
+    "PostalCode": "2343",
+    "Country": "Mauritius",
+    "JobTitle": "Engineer",
+    "Salary": "5000000",
+    "EmployerName": "MCB",
+    "LastKycUpdated": "2023-06-02"
+  }
+}

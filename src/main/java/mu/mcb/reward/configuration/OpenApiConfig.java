@@ -1,46 +1,20 @@
 package mu.mcb.reward.configuration;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@OpenAPIDefinition(
-        info = @Info(
-                contact = @Contact(
-                        name = "The Elite",
-                        email = "contact@theelite.mcb.mu"
-                ),
-                description = "OpenApi documentation for Mcb Rewards",
-                title = "OpenApi specification - The Elite",
-                version = "1.0",
-                license = @License(
-                        name = "Licence name",
-                        url = "https://some-url.com"
-                ),
-                termsOfService = "Terms of service"
-        ),
-        servers = {
-                @Server(
-                        description = "Local ENV",
-                        url = "http://localhost:8080"
-                ),
-                @Server(
-                        description = "PROD ENV",
-                        url = "https://mcb-rewards.mu"
-                )
-        },
-        security = {
-                @SecurityRequirement(
-                        name = "bearerAuth"
-                )
-        }
-)
+/**
+ * Configuration for OpenAPI library
+ *
+ * @author brume
+ */
+@Configuration
 @SecurityScheme(
         name = "bearerAuth",
         description = "JWT auth description",
@@ -50,4 +24,24 @@ import io.swagger.v3.oas.annotations.servers.Server;
         in = SecuritySchemeIn.HEADER
 )
 public class OpenApiConfig {
+    /**
+     * Helper method to populate fields like project title, version and description on Swagger UI
+     *
+     * @param appName        the application name
+     * @param appDescription the application description
+     * @param appVersion     the application version
+     * @return the {@link OpenAPI} object for configuring the properties on Swagger UI
+     */
+    @Bean
+    public OpenAPI openAPI(@Value("${app.name}") String appName, @Value("${app.description}") String appDescription,
+                           @Value("${app.version}") String appVersion) {
+        return new OpenAPI()
+                .info(new io.swagger.v3.oas.models.info.Info()
+                        .title(appName)
+                        .version(appVersion)
+                        .description(appDescription)
+                        .termsOfService("http://swagger.io/terms/")
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+
+    }
 }

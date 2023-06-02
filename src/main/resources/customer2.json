@@ -1,0 +1,21 @@
+{
+  "Customer": {
+    "CustomerId": "hany",
+    "CustomerStatus": "Active",
+    "Title": "Mrs",
+    "FirstName": "Hansheeka",
+    "LastName": "Doris",
+    "DateOfBirth": "1993-03-09",
+    "preferredLanguage": "English",
+    "Gender": "F",
+    "PhoneNumber": "47890283",
+    "StreetName": "sir newton avenue",
+    "City": "Portlouis",
+    "PostalCode": "12345",
+    "Country": "Mauritius",
+    "JobTitle": "Product owner",
+    "Salary": "7000000",
+    "EmployerName": "MCB",
+    "LastKycUpdated": "2023-09-02"
+  }
+}
