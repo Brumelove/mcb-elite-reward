@@ -2,18 +2,13 @@ package mu.mcb.reward.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mu.mcb.reward.dto.Account;
 import mu.mcb.reward.dto.Customer;
 import mu.mcb.reward.dto.CustomerResponse;
 import mu.mcb.reward.dto.RewardSummary;
-import mu.mcb.reward.entity.CustomerEntity;
 import mu.mcb.reward.mapper.RewardsMapper;
+import mu.mcb.reward.repository.AccountRepository;
 import mu.mcb.reward.repository.CustomerRepository;
-import mu.mcb.reward.utilities.JsonUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Brume
@@ -22,23 +17,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserService {
+public class AccountService {
     private final InnovAppService service;
-    private final CustomerRepository repository;
+    private final AccountRepository repository;
     private final RewardsMapper mapper;
 
-    public Customer createCustomer() {
+    public String createAccount(String customerId) {
         service.createAccount();
-        var customer =service.createCustomer();
-       log.info("Cus {}" , customer.getFirstName());
-        return mapper.mapEntityToDto(repository.save(mapper.mapDtoToEntity(customer)));
-    }
-
-    public Customer createAccount() {
-        service.createAccount();
-        var customer =service.createCustomer();
-        log.info("Cus {}" , customer.getFirstName());
-        return mapper.mapEntityToDto(repository.save(mapper.mapDtoToEntity(customer)));
+        var accounts = service.getCustomerAccounts(customerId);
+        log.info("Cus {}" , accounts);
+        repository.saveAll(mapper.mapDtoListToEntity(accounts));
+        return "Saved successfully";
     }
 
 

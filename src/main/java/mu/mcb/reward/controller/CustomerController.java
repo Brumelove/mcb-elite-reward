@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/customers")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerController {
     private final UserService service;
 
-    @PostMapping("/{customerId}")
-    public ResponseEntity<Customer> register(@PathVariable String customerId ) {
-        return ResponseEntity.ok(service.createCustomer(customerId));
+    @PostMapping()
+    public ResponseEntity<Customer> register( ) {
+        return ResponseEntity.ok(service.createCustomer());
     }
 
     @GetMapping("/{customerId}")

@@ -30,7 +30,6 @@ public class LoginService {
                 = "https://mcbinovappapi.azurewebsites.net/auth";
         ResponseEntity<AuthenticationResponse> response
                 = restTemplate.postForEntity(fooResourceUrl , new LoginRequest(username, password), AuthenticationResponse.class);
-        log.info("Token ::: :::{} " , response.getBody().getToken());
         return response.getBody().getToken();
     }
 

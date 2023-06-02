@@ -21,13 +21,16 @@ public interface InnovAppClient {
     ResponseEntity<Customer> createCustomer(@RequestBody CustomerRequest request );
 
     @GetMapping(value = "customers/{customerId}", produces = {"application/json"})
-    ResponseEntity<Customer> getCustomersById(@PathVariable String customerId );
+    ResponseEntity<CustomerRequest> getCustomersById(@PathVariable String customerId );
 
     @GetMapping(value = "customers", produces = {"application/json"})
     ResponseEntity<List<Customer>> getCustomers( );
 
     @GetMapping(value = "accounts", produces = {"application/json"})
     ResponseEntity<List<Account>> getAccounts() ;
+
+    @PostMapping(value = "accounts", produces = {"application/json"})
+    ResponseEntity<Void> createAccounts(@RequestBody Account account) ;
 
     @GetMapping(value = "customers/{customerId}/Accounts", produces = {"application/json"})
     ResponseEntity<List<Account>> getCustomerAccounts(@PathVariable String customerId) ;

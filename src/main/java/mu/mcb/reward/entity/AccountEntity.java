@@ -1,5 +1,6 @@
 package mu.mcb.reward.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,4 +27,6 @@ public class AccountEntity {
     private String accountName;
     @Column
     private String balance;
+
+    private String id;
 }

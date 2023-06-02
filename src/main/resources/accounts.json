@@ -1,0 +1,10 @@
+[
+  {
+    "AccountType": "Current Account",
+    "Currency": "MUR"
+  },
+  {
+    "AccountType": "Savings Account",
+    "Currency": "MUR"
+  }
+]

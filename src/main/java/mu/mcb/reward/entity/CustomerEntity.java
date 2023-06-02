@@ -1,5 +1,6 @@
 package mu.mcb.reward.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,8 +21,15 @@ public class CustomerEntity {
     @Id
     @Column(updatable = false)
     private String customerId;
-    @OneToMany
-    private List<AccountEntity> accounts;
+    private String title;
+    private String firstName;
+    private String lastName;
+    private String dateOfBirth;
+    private String preferredLanguage;
+    private String gender;
+    private String phoneNumber;
+//    @OneToMany
+//    private List<AccountEntity> accounts;
 
 
 }

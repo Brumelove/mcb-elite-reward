@@ -3,6 +3,7 @@ package mu.mcb.reward.utilities;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import mu.mcb.reward.dto.Account;
 import mu.mcb.reward.dto.CustomerRequest;
 
 import java.io.File;
@@ -25,6 +26,17 @@ public abstract class JsonUtils {
         try {
             response = DEFAULT_OBJECT_MAPPER.readValue(
                     new File("src/main/resources/customer1.json"), CustomerRequest.class);
+        } catch (IOException e) {
+            log.info("Error reading file {} ", e.getMessage());
+        }
+        return  response;
+    }
+
+    public static List<Account> createAccount() {
+        List<Account>  response = null;
+        try {
+            response = DEFAULT_OBJECT_MAPPER.readValue(
+                    new File("src/main/resources/accounts.json"), new TypeReference<>() {});
         } catch (IOException e) {
             log.info("Error reading file {} ", e.getMessage());
         }
