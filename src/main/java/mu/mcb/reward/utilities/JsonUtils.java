@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import mu.mcb.reward.dto.Account;
+import mu.mcb.reward.dto.AccountRequest;
 import mu.mcb.reward.dto.CustomerRequest;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public abstract class JsonUtils {
     private static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper();
 
     public static CustomerRequest createCustomer() {
-        CustomerRequest  response = null;
+        CustomerRequest  response = new CustomerRequest();
         try {
             response = DEFAULT_OBJECT_MAPPER.readValue(
                     new File("src/main/resources/customer1.json"), CustomerRequest.class);
@@ -32,8 +33,8 @@ public abstract class JsonUtils {
         return  response;
     }
 
-    public static List<Account> createAccount() {
-        List<Account>  response = null;
+    public static List<AccountRequest> createAccount() {
+        List<AccountRequest>  response = null;
         try {
             response = DEFAULT_OBJECT_MAPPER.readValue(
                     new File("src/main/resources/accounts.json"), new TypeReference<>() {});

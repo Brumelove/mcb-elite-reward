@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
     private final UserService service;
 
-    @PostMapping()
-    public ResponseEntity<Customer> register( ) {
-        return ResponseEntity.ok(service.createCustomer());
+    @PostMapping("/{customerId}")
+    public ResponseEntity<Customer> register(@PathVariable String customerId) {
+        return ResponseEntity.ok(service.createCustomer(customerId));
     }
 
     @GetMapping("/{customerId}")

@@ -30,13 +30,4 @@ public class AccountService {
         return "Saved successfully";
     }
 
-
-    public CustomerResponse getAccountDetailsByCustomerId(String customerId) {
-        var customer = service.getCustomersById(customerId).getCustomer();
-        return CustomerResponse.builder().accounts(service.getCustomerAccounts(customerId)).title(customer.getTitle())
-                .firstName(customer.getFirstName()).lastName(customer.getLastName()).customerId(customerId)
-                .rewards(RewardSummary.builder().build()).build();
-
-
-    }
 }

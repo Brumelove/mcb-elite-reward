@@ -29,7 +29,7 @@ application:
         # 7 days
 
 mcb-innov-app:
-  username: bantish
+  username: hany
   password: P@ssw0rd
   base-url: https://mcbinovappapi.azurewebsites.net/
 server:

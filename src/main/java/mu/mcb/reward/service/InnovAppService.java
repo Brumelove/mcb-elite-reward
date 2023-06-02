@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mu.mcb.reward.api.client.InnovAppClient;
 import mu.mcb.reward.dto.Account;
+import mu.mcb.reward.dto.AccountRequest;
 import mu.mcb.reward.dto.Customer;
 import mu.mcb.reward.dto.CustomerRequest;
 import mu.mcb.reward.entity.AccountEntity;
@@ -21,13 +22,9 @@ import java.util.List;
 @Slf4j
 public class InnovAppService {
     private  final InnovAppClient innovAppClient;
-    public Customer createCustomer() {
-         return innovAppClient.createCustomer(JsonUtils.createCustomer()).getBody();
-
-    }
 
     public void createAccount() {
-        for (Account account: JsonUtils.createAccount() ) {
+        for (AccountRequest account: JsonUtils.createAccount() ) {
            innovAppClient.createAccounts(account);
         }
     }

@@ -23,6 +23,7 @@ public class AccountEntity {
     private String accountNumber;
     @Column
     private String accountType;
+    private String customerId;
     @Column
     private String accountName;
     @Column

@@ -27,17 +27,8 @@ public class UserService {
     private final CustomerRepository repository;
     private final RewardsMapper mapper;
 
-    public Customer createCustomer() {
-        service.createAccount();
-        var customer =service.createCustomer();
-       log.info("Cus {}" , customer.getFirstName());
-        return mapper.mapEntityToDto(repository.save(mapper.mapDtoToEntity(customer)));
-    }
-
-    public Customer createAccount() {
-        service.createAccount();
-        var customer =service.createCustomer();
-        log.info("Cus {}" , customer.getFirstName());
+    public Customer createCustomer(String customerId) {
+        var customer = service.getCustomersById(customerId).getCustomer();
         return mapper.mapEntityToDto(repository.save(mapper.mapDtoToEntity(customer)));
     }
 
