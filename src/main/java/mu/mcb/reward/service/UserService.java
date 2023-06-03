@@ -50,7 +50,7 @@ public class UserService {
                         .getAccountNumber())
                 .accountName(customerId)
                 .accountType("Rewards Account")
-                .balance(String.valueOf(rewards.getCashedAmount())).currency("MUR").build());
+                .balance(String.valueOf(rewards.getTotalPoints())).currency("MUR").build());
 
         return CustomerResponse.builder().accounts(accountList).title(customer.getTitle()).
                 firstName(customer.getFirstName()).lastName(customer.getLastName()).customerId(customerId)
