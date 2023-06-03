@@ -19,7 +19,6 @@ import java.util.List;
 @Table(name = "customer")
 public class CustomerEntity {
     @Id
-    @Column(updatable = false)
     private String customerId;
     private String title;
     private String firstName;

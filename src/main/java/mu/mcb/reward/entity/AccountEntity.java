@@ -19,15 +19,10 @@ import lombok.*;
 @Table(name = "account")
 public class AccountEntity {
     @Id
-    @Column
     private String accountNumber;
-    @Column
     private String accountType;
     private String customerId;
-    @Column
     private String accountName;
-    @Column
     private String balance;
-
     private String id;
 }

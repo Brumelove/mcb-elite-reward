@@ -40,7 +40,7 @@ public class RewardsService {
         repository.save(RewardSummaryEntity.builder()
                 .cashedAmount(100)
                 .userId(customerId).tier(TierType.TIER1.getType())
-                .totalPoints(1000)
+                .totalPoints(1000.0)
                 .build());
     }
 

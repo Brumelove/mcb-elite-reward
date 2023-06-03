@@ -1,11 +1,7 @@
 
 package mu.mcb.reward.dto;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.*;
-import mu.mcb.reward.enums.TierType;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -13,7 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RewardSummary {
-    private Integer totalPoints ;
+    private Double totalPoints ;
 
     private String tier ;
 }

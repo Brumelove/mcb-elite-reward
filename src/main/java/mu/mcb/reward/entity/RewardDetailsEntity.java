@@ -2,6 +2,8 @@ package mu.mcb.reward.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -16,21 +18,16 @@ public class RewardDetailsEntity {
     @Id
     @GeneratedValue
     private Integer id;
-
-    @Column
     private Integer rewardSummaryId;
-    @Column
     private String rewardName;
-    @Column
     private String rewardType;
-    private Integer rewardPoints;
+    private Double rewardPoints;
     private String rewardStatus;
-    private Date rewardExpiry;
+    private LocalDateTime rewardExpiry;
     private Date dateRewardEarned;
     private String trxCategory;
     private String trxCcy;
     private Double trxAmount;
     private String trxReference;
-    private Double points;
     private Boolean active;
 }

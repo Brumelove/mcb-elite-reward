@@ -19,13 +19,13 @@ public class RewardSummaryEntity {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column
+
     private String userId;
-    @Column
+
     private Integer rewardId;
-    @Column
-    private Integer totalPoints;
-    @Column
+
+    private Double totalPoints;
+
     private Integer cashedAmount;
     private String tier ;
 
