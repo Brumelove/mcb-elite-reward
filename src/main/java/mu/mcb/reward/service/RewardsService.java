@@ -49,6 +49,6 @@ public class RewardsService {
 
         repository.save(RewardSummaryEntity.builder().id(rewards.getId()).userId(rewards.getUserId())
                 .tier(rewardSummary.getTier()).totalPoints(rewardSummary.getTotalPoints())
-                .totalPoints(rewards.getTotalPoints()).build());
+                .build());
     }
 }
