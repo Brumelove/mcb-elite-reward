@@ -1,5 +1,6 @@
 package mu.mcb.reward.service;
 
+import ch.qos.logback.core.testUtil.RandomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mu.mcb.reward.dto.Account;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Brume
@@ -44,6 +46,9 @@ public class UserService {
             }
             accountList.add(account);
         }
+        accountList.add(Account.builder().accountNumber(accounts.get(0).getAccountNumber()).accountName(customerId)
+                .accountType("Rewards Account")
+                .balance(String.valueOf(rewards.getCashedAmount())).currency("MUR").build());
         return CustomerResponse.builder().accounts(accountList).title(customer.getTitle()).
                 firstName(customer.getFirstName()).lastName(customer.getLastName()).customerId(customerId)
                 .rewards(RewardSummary.builder().totalPoints(rewards.getTotalPoints()).tier(rewards.getTier())
