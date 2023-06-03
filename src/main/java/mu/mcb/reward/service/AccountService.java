@@ -30,7 +30,6 @@ public class AccountService {
     public String createAccount(String customerId) {
         service.createAccount();
         var accounts = service.getCustomerAccounts(customerId);
-        log.info("Cus {}" , accounts);
         repository.saveAll(mapper.mapDtoListToEntity(accounts));
         return "Saved successfully";
     }

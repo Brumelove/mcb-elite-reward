@@ -37,8 +37,4 @@ public interface InnovAppClient {
     @GetMapping(value = "customers/{customerId}/Accounts", produces = {"application/json"})
     ResponseEntity<List<Account>> getCustomerAccounts(@PathVariable String customerId) ;
 
-    @PostMapping(value = "{versionNumber}/{domain}/{serviceName}", produces = {"application/json"})
-    ResponseEntity<Object> postProcessMqReqV2(@PathVariable("versionNumber") String versionNumber,
-                                              @PathVariable("domain") String domain, @PathVariable("serviceName")
-                                              String serviceName, Object processMqReqPostRequestBody);
 }

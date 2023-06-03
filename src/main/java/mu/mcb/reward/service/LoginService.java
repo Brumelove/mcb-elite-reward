@@ -21,13 +21,15 @@ import org.springframework.web.client.RestTemplate;
 public class LoginService {
     @Value( "${mcb-innov-app.username}")
     private String username;
+    @Value( "${mcb-innov-app.base-url}")
+    private String baseUrl;
 
     @Value( "${mcb-innov-app.password}")
     private String password;
     public String getToken(){
         RestTemplate restTemplate = new RestTemplate();
         String fooResourceUrl
-                = "https://mcbinovappapi.azurewebsites.net/auth";
+                = baseUrl + "/auth";
         ResponseEntity<AuthenticationResponse> response
                 = restTemplate.postForEntity(fooResourceUrl , new LoginRequest(username, password), AuthenticationResponse.class);
         return response.getBody().getToken();

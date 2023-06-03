@@ -5,13 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import mu.mcb.reward.api.client.InnovAppClient;
 import mu.mcb.reward.dto.Account;
 import mu.mcb.reward.dto.AccountRequest;
-import mu.mcb.reward.dto.Customer;
 import mu.mcb.reward.dto.CustomerRequest;
-import mu.mcb.reward.entity.AccountEntity;
 import mu.mcb.reward.utilities.JsonUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -35,4 +35,10 @@ public class AccountController {
         rewardsService.updateRewards(customerId, tier);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/{customerId}/rewards")
+    public ResponseEntity<Void> createRewards(@PathVariable String customerId) {
+        rewardsService.createRewards(customerId);
+        return ResponseEntity.ok().build();
+    }
 }

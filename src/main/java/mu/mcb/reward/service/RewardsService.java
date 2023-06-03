@@ -17,13 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 @Slf4j
 public class RewardsService {
-    private final InnovAppService service;
     private final RewardSummaryRepository repository;
 
-    public void createRewards(String customerId) {
-
-        repository.save(RewardSummaryEntity.builder().userId(customerId).tier(TierType.TIER1.getType()).totalPoints(5).build());
-    }
 
     public RewardSummaryEntity getRewardsByCustomerId(String customerId) {
         return repository.getByUserId(customerId).orElseThrow(
@@ -39,12 +34,19 @@ public class RewardsService {
                 .totalPoints(rewards.getTotalPoints() - pointsToRedeem).build());
     }
 
+    public void createRewards(String customerId) {
+
+        repository.save(RewardSummaryEntity.builder()
+                .cashedAmount(100)
+                .userId(customerId).tier(TierType.TIER1.getType())
+                .totalPoints(1000)
+                .build());
+    }
+
     public void updateRewards(String customerId, String tier) {
         var rewards = getRewardsByCustomerId(customerId);
 
         repository.save(RewardSummaryEntity.builder().userId(customerId).tier(tier)
                 .totalPoints(rewards.getTotalPoints()).build());
     }
-
-
 }

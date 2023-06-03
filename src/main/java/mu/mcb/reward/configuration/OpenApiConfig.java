@@ -15,14 +15,6 @@ import org.springframework.context.annotation.Configuration;
  * @author brume
  */
 @Configuration
-//@SecurityScheme(
-//        name = "bearerAuth",
-//        description = "JWT auth description",
-//        scheme = "bearer",
-//        type = SecuritySchemeType.HTTP,
-//        bearerFormat = "JWT",
-//        in = SecuritySchemeIn.HEADER
-//)
 public class OpenApiConfig {
     /**
      * Helper method to populate fields like project title, version and description on Swagger UI

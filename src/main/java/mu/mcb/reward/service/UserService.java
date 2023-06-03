@@ -6,14 +6,8 @@ import mu.mcb.reward.dto.Account;
 import mu.mcb.reward.dto.Customer;
 import mu.mcb.reward.dto.CustomerResponse;
 import mu.mcb.reward.dto.RewardSummary;
-import mu.mcb.reward.entity.CustomerEntity;
-import mu.mcb.reward.entity.RewardSummaryEntity;
-import mu.mcb.reward.enums.TierType;
 import mu.mcb.reward.mapper.RewardsMapper;
 import mu.mcb.reward.repository.CustomerRepository;
-import mu.mcb.reward.repository.RewardSummaryRepository;
-import mu.mcb.reward.utilities.JsonUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,6 +46,7 @@ public class UserService {
         }
         return CustomerResponse.builder().accounts(accountList).title(customer.getTitle()).
                 firstName(customer.getFirstName()).lastName(customer.getLastName()).customerId(customerId)
-                .rewards(RewardSummary.builder().totalPoints(rewards.getTotalPoints()).tier(rewards.getTier()).build()).build();
+                .rewards(RewardSummary.builder().totalPoints(rewards.getTotalPoints()).tier(rewards.getTier())
+                        .build()).build();
     }
 }
