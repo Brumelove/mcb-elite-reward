@@ -48,6 +48,7 @@ public class RewardsService {
         var rewards = getRewardsByCustomerId(customerId);
 
         repository.save(RewardSummaryEntity.builder().id(rewards.getId()).userId(rewards.getUserId())
+                        .cashedAmount(rewards.getCashedAmount())
                 .tier(rewardSummary.getTier()).totalPoints(rewardSummary.getTotalPoints())
                 .build());
     }
