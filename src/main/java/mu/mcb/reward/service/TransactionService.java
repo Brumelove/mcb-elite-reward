@@ -8,28 +8,24 @@ import mu.mcb.reward.entity.CategoryEntity;
 import mu.mcb.reward.entity.RewardDetailsEntity;
 import mu.mcb.reward.entity.RewardSummaryEntity;
 import mu.mcb.reward.entity.TierEntity;
+import mu.mcb.reward.enums.SubCategoryType;
+import mu.mcb.reward.enums.TierType;
 import mu.mcb.reward.repository.CategoryRepository;
 import mu.mcb.reward.repository.RewardDetailsRepository;
-import mu.mcb.reward.repository.RewardSummaryRepository;
 import mu.mcb.reward.repository.TierRepository;
 import mu.mcb.reward.utilities.UniqueReferenceGenerator;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class TransactionService {
-
     private final RewardDetailsRepository rewardDetailsRepository;
     private final UniqueReferenceGenerator uniqueReferenceGenerator;
-
-    private final RewardSummaryRepository rewardSummaryRepository;
-    private final CategoryRepository categoryRepository;
-    private final TierRepository tierRepository;
+    private final RewardsService rewardsService;
+    private final TierService tierService;
 
     public Transaction postTransaction (TransactionRequest transactionRequest) {
         Transaction transaction = new Transaction();
@@ -51,51 +47,36 @@ public class TransactionService {
 
         rewardDetailsRepository.save(rewardDetailsEntity);
 
-        System.out.println(transaction.getTrxCategory());
-
         // get the points multiplier
-        CategoryEntity categoryEntity = categoryRepository.findByCategory(transactionRequest.getCategory());
-
-        Double points = categoryEntity.getPoints_multiplier() * Double.valueOf(transactionRequest.getAmount());
+        var categoryEntity = SubCategoryType.getSubCategory(transactionRequest.getCategory());
+        Double points = categoryEntity.getPointsMultiplier() * transactionRequest.getAmount();
         transaction.setPoints(String.valueOf(points));
 
         rewardDetailsEntity.setRewardPoints(points);
 
         // get the tier based on points
-        TierEntity tierEntity = tierRepository.findTierByPoints(points);
-
+        var tierType = tierService.findTierByPoints(points);
         // check if reward summary exists for this user
-        Optional<RewardSummaryEntity> rewardSummaryEntity = rewardSummaryRepository.getByUserId(transaction.getCustomerId());
+      var rewardSummaryEntity = rewardsService.getRewardsByCustomerId(transaction.getCustomerId());
 
-
-        if (rewardSummaryEntity.isEmpty()){
+        if (rewardSummaryEntity == null){
             RewardSummaryEntity rewardSummaryEntityNew = new RewardSummaryEntity();
             rewardSummaryEntityNew.setUserId(transactionRequest.getCustomerId());
-            rewardSummaryEntityNew.setTier(tierEntity.getTier());
+            rewardSummaryEntityNew.setTier(tierType.getTier());
             rewardSummaryEntityNew.setTotalPoints(points);
-            rewardSummaryRepository.save(rewardSummaryEntityNew);
+            var response = rewardsService.createRewards(rewardSummaryEntityNew);
+            rewardDetailsEntity.setRewardSummaryId(response.getId());
         }else{
-            Double cumulativePoints = points + rewardSummaryEntity.get().getTotalPoints();
+            Double cumulativePoints = points + rewardSummaryEntity.getTotalPoints();
             RewardSummaryEntity rewardSummaryEntityNew = new RewardSummaryEntity();
             rewardSummaryEntityNew.setUserId(transactionRequest.getCustomerId());
-            rewardSummaryEntityNew.setTier(tierEntity.getTier());
+            rewardSummaryEntityNew.setTier(tierType.getTier());
             rewardSummaryEntityNew.setTotalPoints(cumulativePoints);
-            rewardSummaryEntityNew.setId(rewardSummaryEntity.get().getId());
-            rewardSummaryRepository.save(rewardSummaryEntityNew);
+            rewardSummaryEntityNew.setId(rewardSummaryEntity.getId());
+            rewardsService.createRewards(rewardSummaryEntityNew);
         }
-
-
-
 
         transaction.setTrxReference(reference);
         return transaction; // to return points and reference
     }
-
-//    method to get transactions
-//    public Object getTransactionList(TransactionRequest transactionRequest) {
-//    }
-
-
-
-
 }

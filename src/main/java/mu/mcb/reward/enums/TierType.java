@@ -8,11 +8,25 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public enum TierType {
-    TIER1("TEER 1"),
-    TIER2("TEER 2"),
-    TIER3("TEER 3"),
-    TIER4("TEER 4");
+    TIER1("TEER 1",0.0, 250000.0),
+    TIER2("TEER 2", 250001.0,900000.0 ),
+    TIER3("TEER 3", 900001.0, 2000000.0),
+    TIER4("TEER 4", 2000001.0,  999999999.0);
 
     @Getter
     private final String type;
+    @Getter
+    private final Double minimumAmount;
+    @Getter
+    private final Double maximumAmount;
+
+    public static TierType findTierByPoints( Double points) {
+        for (TierType tierType : values()) {
+            if ( Math.abs(tierType.getMinimumAmount()) >= points && Math.abs(tierType.getMinimumAmount()) <= points ) {
+                return tierType;
+            }
+        }
+        throw new IllegalArgumentException("Invalid Tier points for " + points);
+
+    }
 }

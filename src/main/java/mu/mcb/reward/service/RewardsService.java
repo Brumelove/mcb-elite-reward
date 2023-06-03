@@ -35,6 +35,11 @@ public class RewardsService {
                 .totalPoints(rewards.getTotalPoints() - pointsToRedeem).build());
     }
 
+    public RewardSummaryEntity createRewards(RewardSummaryEntity entity) {
+
+       return repository.save(entity);
+    }
+
     public void createRewards(String customerId) {
 
         repository.save(RewardSummaryEntity.builder()
