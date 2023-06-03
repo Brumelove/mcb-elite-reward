@@ -15,19 +15,22 @@ import java.util.Date;
 public class RewardDetailsEntity {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
-    private int rewardSummaryId;
+    @Column
+    private Integer rewardSummaryId;
+    @Column
     private String rewardName;
+    @Column
     private String rewardType;
-    private int rewardPoints;
+    private Integer rewardPoints;
     private String rewardStatus;
     private Date rewardExpiry;
     private Date dateRewardEarned;
     private String trxCategory;
     private String trxCcy;
-    private double trxAmount;
+    private Double trxAmount;
     private String trxReference;
-    private double points;
-    private boolean active;
+    private Double points;
+    private Boolean active;
 }

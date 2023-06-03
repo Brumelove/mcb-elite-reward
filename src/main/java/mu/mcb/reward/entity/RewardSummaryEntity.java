@@ -18,12 +18,15 @@ import java.util.Date;
 public class RewardSummaryEntity {
     @Id
     @GeneratedValue
-    private int id;
-    private int userId;
-    private int rewardId;
-    private int totalPoints;
-    @Enumerated(EnumType.STRING)
-    private TierType tier = TierType.TIER1;
-    private Date expireOn;
+    private Integer id;
+    @Column
+    private String userId;
+    @Column
+    private Integer rewardId;
+    @Column
+    private Integer totalPoints;
+    @Column
+    private Integer cashedAmount;
+    private String tier ;
 
 }

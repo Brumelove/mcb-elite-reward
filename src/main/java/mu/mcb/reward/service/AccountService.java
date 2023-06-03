@@ -8,6 +8,7 @@ import mu.mcb.reward.dto.RewardSummary;
 import mu.mcb.reward.mapper.RewardsMapper;
 import mu.mcb.reward.repository.AccountRepository;
 import mu.mcb.reward.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,10 @@ public class AccountService {
     private final InnovAppService service;
     private final AccountRepository repository;
     private final RewardsMapper mapper;
+    private final RewardsService rewardsService;
+    @Value( "${mcb-innov-app.points-conversion}")
+    private Integer pointsConversion;
+
 
     public String createAccount(String customerId) {
         service.createAccount();
@@ -28,6 +33,12 @@ public class AccountService {
         log.info("Cus {}" , accounts);
         repository.saveAll(mapper.mapDtoListToEntity(accounts));
         return "Saved successfully";
+    }
+
+    public Integer redeemPoints(String customerId, Integer points) {
+        var amountInRupees = points / pointsConversion;
+        rewardsService.updateRewards(customerId, points, amountInRupees);
+        return amountInRupees;
     }
 
 }

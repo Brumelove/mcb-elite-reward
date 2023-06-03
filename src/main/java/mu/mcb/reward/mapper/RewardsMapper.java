@@ -16,7 +16,6 @@ import java.util.List;
 public interface RewardsMapper {
 
     CustomerEntity mapDtoToEntity(Customer source);
-
     AccountEntity mapDtoToEntity(Account source);
 
     List<AccountEntity> mapDtoListToEntity(List<Account> source);

@@ -1,7 +1,7 @@
 
 package mu.mcb.reward.dto;
 
-import jakarta.persistence.*;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.*;
 import mu.mcb.reward.enums.TierType;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RewardSummary {
-    private int totalPoints = 5;
-    @Enumerated(EnumType.STRING)
-    private TierType tier = TierType.TIER1;
+    private Integer totalPoints ;
+
+    private String tier ;
 }
