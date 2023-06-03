@@ -24,10 +24,10 @@ public class TransactionController {
     private final TierService tierService;
 
 
-    @PostMapping()
-    public ResponseEntity<Transaction> postTransaction(@RequestBody TransactionRequest transactionRequest) {
-        return ResponseEntity.ok(transactionService.postTransaction(transactionRequest));
-    }
+//    @PostMapping()
+//    public ResponseEntity<Transaction> postTransaction(@RequestBody TransactionRequest transactionRequest) {
+//        return ResponseEntity.ok(transactionService.postTransaction(transactionRequest));
+//    }
 
     @PostMapping()
     public ResponseEntity<String> create(@RequestBody TransactionRequest transactionRequest) {
