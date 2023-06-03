@@ -30,6 +30,11 @@ public class TransactionController {
     }
 
     @PostMapping()
+    public ResponseEntity<String> create(@RequestBody TransactionRequest transactionRequest) {
+        return ResponseEntity.ok("Transaction Updated successfully");
+    }
+
+    @PostMapping()
     public ResponseEntity<TierEntity> createTier(@RequestBody TierEntity transactionRequest) {
         return ResponseEntity.ok(tierService.createTier(transactionRequest));
     }
