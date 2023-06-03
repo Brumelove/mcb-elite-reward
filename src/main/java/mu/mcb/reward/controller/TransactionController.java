@@ -23,20 +23,9 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final TierService tierService;
 
-
-//    @PostMapping()
-//    public ResponseEntity<Transaction> postTransaction(@RequestBody TransactionRequest transactionRequest) {
-//        return ResponseEntity.ok(transactionService.postTransaction(transactionRequest));
-//    }
-
     @PostMapping()
     public ResponseEntity<String> create(@RequestBody TransactionRequest transactionRequest) {
         return ResponseEntity.ok("Transaction Updated successfully");
-    }
-
-    @PostMapping()
-    public ResponseEntity<TierEntity> createTier(@RequestBody TierEntity transactionRequest) {
-        return ResponseEntity.ok(tierService.createTier(transactionRequest));
     }
 
     @GetMapping("/categories")
