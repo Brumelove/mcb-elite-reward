@@ -22,11 +22,15 @@ public enum TierType {
 
     public static TierType findTierByPoints( Double points) {
         for (TierType tierType : values()) {
-            if ( Math.abs(tierType.getMinimumAmount()) >= points && Math.abs(tierType.getMinimumAmount()) <= points ) {
+            if ( tierType.getMaximumAmount() >= points && tierType.getMinimumAmount() <= points ) {
                 return tierType;
             }
         }
         throw new IllegalArgumentException("Invalid Tier points for " + points);
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findTierByPoints(1000.0));
     }
 }

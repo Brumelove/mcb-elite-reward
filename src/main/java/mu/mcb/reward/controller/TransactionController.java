@@ -1,15 +1,11 @@
 package mu.mcb.reward.controller;
 
 import lombok.RequiredArgsConstructor;
-import mu.mcb.reward.dto.Customer;
-import mu.mcb.reward.dto.CustomerResponse;
 import mu.mcb.reward.dto.Transaction;
 import mu.mcb.reward.dto.TransactionRequest;
-import mu.mcb.reward.entity.TierEntity;
 import mu.mcb.reward.enums.SubCategoryType;
 import mu.mcb.reward.service.TierService;
 import mu.mcb.reward.service.TransactionService;
-import mu.mcb.reward.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +17,10 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TransactionController {
     private final TransactionService transactionService;
-    private final TierService tierService;
 
     @PostMapping()
-    public ResponseEntity<String> create(@RequestBody TransactionRequest transactionRequest) {
-        return ResponseEntity.ok("Transaction Updated successfully");
+    public ResponseEntity<Transaction> create(@RequestBody TransactionRequest transactionRequest) {
+        return ResponseEntity.ok(transactionService.postTransaction(transactionRequest));
     }
 
     @GetMapping("/categories")

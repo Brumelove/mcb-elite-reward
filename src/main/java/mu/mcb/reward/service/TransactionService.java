@@ -2,6 +2,7 @@ package mu.mcb.reward.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mu.mcb.reward.dto.RewardSummary;
 import mu.mcb.reward.dto.Transaction;
 import mu.mcb.reward.dto.TransactionRequest;
 import mu.mcb.reward.entity.CategoryEntity;
@@ -25,10 +26,9 @@ public class TransactionService {
     private final RewardDetailsRepository rewardDetailsRepository;
     private final UniqueReferenceGenerator uniqueReferenceGenerator;
     private final RewardsService rewardsService;
-    private final TierService tierService;
 
     public Transaction postTransaction (TransactionRequest transactionRequest) {
-        Transaction transaction = new Transaction();
+        var transaction =Transaction.builder();
         RewardDetailsEntity rewardDetailsEntity = new RewardDetailsEntity();
         int numberOfDaysToAdd = 1000;
 
@@ -50,33 +50,38 @@ public class TransactionService {
         // get the points multiplier
         var categoryEntity = SubCategoryType.getSubCategory(transactionRequest.getCategory());
         Double points = categoryEntity.getPointsMultiplier() * transactionRequest.getAmount();
-        transaction.setPoints(String.valueOf(points));
+        transaction.points(String.valueOf(points));
 
         rewardDetailsEntity.setRewardPoints(points);
 
         // get the tier based on points
-        var tierType = tierService.findTierByPoints(points);
+        var tierType = TierType.findTierByPoints(points);
         // check if reward summary exists for this user
-      var rewardSummaryEntity = rewardsService.getRewardsByCustomerId(transaction.getCustomerId());
+      var rewardSummaryEntity = rewardsService.getRewardsByCustomerId(transactionRequest.getCustomerId());
 
         if (rewardSummaryEntity == null){
             RewardSummaryEntity rewardSummaryEntityNew = new RewardSummaryEntity();
             rewardSummaryEntityNew.setUserId(transactionRequest.getCustomerId());
-            rewardSummaryEntityNew.setTier(tierType.getTier());
+            rewardSummaryEntityNew.setTier(tierType.getType());
             rewardSummaryEntityNew.setTotalPoints(points);
             var response = rewardsService.createRewards(rewardSummaryEntityNew);
             rewardDetailsEntity.setRewardSummaryId(response.getId());
+            transaction.rewardSummaryId(String.valueOf(response.getId()));
         }else{
             Double cumulativePoints = points + rewardSummaryEntity.getTotalPoints();
-            RewardSummaryEntity rewardSummaryEntityNew = new RewardSummaryEntity();
-            rewardSummaryEntityNew.setUserId(transactionRequest.getCustomerId());
-            rewardSummaryEntityNew.setTier(tierType.getTier());
+            RewardSummary rewardSummaryEntityNew = new RewardSummary();
+            rewardSummaryEntityNew.setTier(tierType.getType());
             rewardSummaryEntityNew.setTotalPoints(cumulativePoints);
-            rewardSummaryEntityNew.setId(rewardSummaryEntity.getId());
-            rewardsService.createRewards(rewardSummaryEntityNew);
+            rewardsService.updateRewards(transactionRequest.getCustomerId(), rewardSummaryEntityNew);
         }
 
-        transaction.setTrxReference(reference);
-        return transaction; // to return points and reference
+        transaction.trxReference(reference);
+        transaction.customerId(transactionRequest.getCustomerId())
+                .active("true")
+                .rewardPoints(String.valueOf(points))
+                .trxAmount(String.valueOf(transactionRequest.getAmount()))
+                .trxCategory(categoryEntity.getCategoryType().getCategory());
+
+        return transaction.build(); // to return points and reference
     }
 }

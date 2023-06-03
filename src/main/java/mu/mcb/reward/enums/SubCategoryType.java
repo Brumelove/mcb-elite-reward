@@ -51,7 +51,7 @@ public enum SubCategoryType {
 
     public static SubCategoryType getSubCategory( String subCategory) {
         for (SubCategoryType subCategoryType : values()) {
-            if (subCategoryType.subCategory.equalsIgnoreCase(subCategory)) {
+            if (subCategoryType.subCategory.equalsIgnoreCase(subCategory.trim())) {
                 return subCategoryType;
             }
         }

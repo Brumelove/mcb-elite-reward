@@ -46,9 +46,12 @@ public class UserService {
             }
             accountList.add(account);
         }
-        accountList.add(Account.builder().accountNumber(accounts.get(0).getAccountNumber()).accountName(customerId)
+        accountList.add(Account.builder().accountNumber(accounts.get(0)
+                        .getAccountNumber())
+                .accountName(customerId)
                 .accountType("Rewards Account")
                 .balance(String.valueOf(rewards.getCashedAmount())).currency("MUR").build());
+
         return CustomerResponse.builder().accounts(accountList).title(customer.getTitle()).
                 firstName(customer.getFirstName()).lastName(customer.getLastName()).customerId(customerId)
                 .rewards(RewardSummary.builder().totalPoints(rewards.getTotalPoints()).tier(rewards.getTier())
