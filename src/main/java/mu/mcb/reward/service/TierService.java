@@ -16,4 +16,9 @@ public class TierService {
         return tierRepository.findTierByPoints(points);
     }
 
+    public TierEntity createTier (TierEntity tierEntity) {
+        return tierRepository.save(tierEntity);
+    }
+
+
 }
