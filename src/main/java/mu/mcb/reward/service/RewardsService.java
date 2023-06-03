@@ -2,6 +2,7 @@ package mu.mcb.reward.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mu.mcb.reward.dto.RewardSummary;
 import mu.mcb.reward.entity.RewardSummaryEntity;
 import mu.mcb.reward.enums.TierType;
 import mu.mcb.reward.repository.RewardSummaryRepository;
@@ -29,7 +30,7 @@ public class RewardsService {
         var rewards = getRewardsByCustomerId(customerId);
 
         repository.save(RewardSummaryEntity.builder().id(rewards.getId())
-                .cashedAmount(rewards.getCashedAmount() +cashedAmount)
+                .cashedAmount(rewards.getCashedAmount() + cashedAmount)
                 .userId(customerId).tier(rewards.getTier())
                 .totalPoints(rewards.getTotalPoints() - pointsToRedeem).build());
     }
@@ -43,10 +44,11 @@ public class RewardsService {
                 .build());
     }
 
-    public void updateRewards(String customerId, String tier) {
+    public void updateRewards(String customerId, RewardSummary rewardSummary) {
         var rewards = getRewardsByCustomerId(customerId);
 
-        repository.save(RewardSummaryEntity.builder().userId(customerId).tier(tier)
+        repository.save(RewardSummaryEntity.builder().id(rewards.getId()).userId(rewards.getUserId())
+                .tier(rewardSummary.getTier()).totalPoints(rewardSummary.getTotalPoints())
                 .totalPoints(rewards.getTotalPoints()).build());
     }
 }
